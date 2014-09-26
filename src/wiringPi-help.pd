@@ -1,0 +1,91 @@
+#N canvas 583 51 712 695 10;
+#X obj 543 674 wiringPi;
+#X obj 541 632 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 543 704 print;
+#X obj 20 253 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 20 277 wiringPi pin 20 input;
+#X obj 394 303 wiringPi pin 21 output;
+#X obj 394 278 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X text 43 253 BCM 20 \, physical 38 \, wPi 28;
+#X text 411 277 BCM 21 \, physical 40 \, wPi 29;
+#X msg 23 413 digitalRead 20;
+#X msg 39 460 digitalWrite 21 1;
+#X msg 308 472 pwmWrite 18 513;
+#X msg 301 448 pinMode 18 pwm_output;
+#X msg 30 629 wpiPinToGpio 1;
+#X msg 38 653 physPinToGpio 12;
+#X msg 24 606 piBoardRev;
+#X obj 10 9 cnv 15 600 200 empty empty wiringPi 20 12 0 14 -204800
+-66577 0;
+#X text 112 40 Copyright (c) 2014 \, Garth Zeglin. Provided under the
+terms of the 3-clause BSD license.;
+#X text 112 10 External for wiringPi to interface to hardware I/O on
+a Raspberry Pi.;
+#X text 112 70 The wiringPi object can be specialized using optional
+creation arguments. The generic mode accepts messages related to the
+wiringPi API. The pin-specific mode associates an object with a specific
+pin.;
+#X text 112 126 If pd is running with root permissions \, the interface
+uses the fast direct hardware access. Without root permission \, the
+fallback path uses the slower and less capable /sys/class/gpio interface.
+;
+#X text 18 217 Pin-specific input object. The pin numbering scheme
+follows the Broadcom GPIO numbers.;
+#X floatatom 26 307 5 0 0 0 - - -;
+#X obj 20 333 print input-20;
+#X text 114 186 Example physical pins are for a Raspberry Pi B+;
+#X text 389 258 Pin-specific output object.;
+#X obj 42 685 wiringPi;
+#X obj 42 712 print pi-info;
+#X text 4 586 Informational queries;
+#X text 27 760 still under development;
+#X text 21 388 Generic object accepting general I/O messages.;
+#X msg 31 436 pinMode 21 output;
+#X obj 47 505 wiringPi;
+#X obj 47 531 print general-IO;
+#X text 545 601 Disallowed;
+#X obj 564 632 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X floatatom 586 632 5 0 0 0 - - -;
+#X text 301 422 PWM mode only works on specific GPIO pins.;
+#X obj 480 449 hsl 128 15 0 1024 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 477 495 wiringPi pin 18 pwm_output;
+#X obj 311 498 wiringPi;
+#X text 339 515 generic version;
+#X text 493 516 pin-specific version;
+#X text 99 606 board revision number;
+#X text 133 630 GPIO pin corresponding to wiringPi pin convention;
+#X text 156 653 GPIO pin corresponding to physical pin number;
+#X text 488 478 BCM 18 \, physical 12 \, wPi 1;
+#X msg 45 482 digitalRead 21;
+#X text 310 537 (default PWM period measured at 3.4uSec on RPi B+)
+;
+#X msg 52 809 spi_init 0 1e+06;
+#X obj 56 836 wiringPi;
+#X msg 44 784 load_spi_driver;
+#X connect 0 0 2 0;
+#X connect 1 0 0 0;
+#X connect 3 0 4 0;
+#X connect 4 0 22 0;
+#X connect 4 0 23 0;
+#X connect 6 0 5 0;
+#X connect 9 0 32 0;
+#X connect 10 0 32 0;
+#X connect 11 0 40 0;
+#X connect 12 0 40 0;
+#X connect 13 0 26 0;
+#X connect 14 0 26 0;
+#X connect 15 0 26 0;
+#X connect 26 0 27 0;
+#X connect 31 0 32 0;
+#X connect 32 0 33 0;
+#X connect 35 0 0 0;
+#X connect 36 0 0 0;
+#X connect 38 0 39 0;
+#X connect 47 0 32 0;
+#X connect 49 0 50 0;
+#X connect 51 0 50 0;
